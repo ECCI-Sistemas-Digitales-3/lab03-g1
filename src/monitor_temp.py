@@ -1,17 +1,24 @@
 import matplotlib.pyplot as plt
 import time
 import subprocess
+import csv
 
 class MonitorTemperaturaRPI:
-    def __init__(self, duracion_max=60, intervalo=0.5):
+    def __init__(self, duracion_max=60, intervalo=0.5, archivo_csv="temperaturas.csv"):
         self.duracion_max = duracion_max
         self.intervalo = intervalo
         self.tiempos = []
         self.temperaturas = []
         self.inicio = time.time()
+        self.archivo_csv = archivo_csv
 
         plt.ion()
         self.fig, self.ax = plt.subplots()
+
+        # Crear el archivo CSV y escribir los encabezados si no existe
+        with open(self.archivo_csv, mode='w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['Tiempo (s)', 'Temperatura (°C)'])
 
     def leer_temperatura(self):
         try:
@@ -28,6 +35,11 @@ class MonitorTemperaturaRPI:
         if temp is not None:
             self.tiempos.append(ahora)
             self.temperaturas.append(temp)
+
+            # Escribir los nuevos datos en el archivo CSV
+            with open(self.archivo_csv, mode='a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow([ahora, temp])
 
             while self.tiempos and self.tiempos[0] < ahora - self.duracion_max:
                 self.tiempos.pop(0)
@@ -62,3 +74,4 @@ class MonitorTemperaturaRPI:
 if __name__ == "__main__":
     monitor = MonitorTemperaturaRPI()
     monitor.ejecutar()
+
