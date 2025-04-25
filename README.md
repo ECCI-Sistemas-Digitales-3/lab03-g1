@@ -4,7 +4,8 @@
 ## Integrantes
 [Jhonatan Rodriguez Grisales](https://github.com/Jhonatan-3011)
 
-Nelson Prada
+
+[Nelson Prada](https://github.com/nelson18prada)
 
 Miguel Angel Bernal 
 
@@ -108,9 +109,15 @@ Durante cada ciclo del bucle de monitoreo, se calcula el tiempo transcurrido des
 
 1. ¿Qué función cumple ```plt.fignum_exists(self.fig.number)``` en el ciclo principal?
 
+La función plt.fignum_exists(self.fig.number) comprueba si la ventana de la gráfica sigue abierta. Si el usuario cierra la ventana mientras el programa está en ejecución, esta función devuelve False, lo que provoca que el bucle principal se detenga de manera controlada. Es un control de presencia: mientras la ventana esté abierta, el monitoreo continúa; cuando se cierra, el programa finaliza. Se evitan errores y se previene que el programa siga funcionando innecesariamente.
+
 2. ¿Por qué se usa ```time.sleep(self.intervalo)``` y qué pasa si se quita?
 
+La instrucción time.sleep(self.intervalo) regula la frecuencia con la que se leen y grafican los datos. Esta pausa evita la sobrecarga del procesador por lecturas y gráficos constantes. Sin esta pausa, el código se ejecuta a la máxima velocidad, lo que puede saturar el sistema, calentar más la Raspberry Pi y acumular datos innecesarios en el archivo CSV en poco tiempo, generando ruido en vez de información útil.
+
 3. ¿Qué ventaja tiene usar ```__init__``` para inicializar listas y variables?
+
+El método __init__ inicializa listas y variables desde que se crea el objeto. Establece parámetros como el tiempo máximo de monitoreo, la frecuencia de actualización y el nombre del archivo CSV. Prepara los elementos gráficos y las estructuras de datos. El objeto queda listo desde el inicio, evitando errores por variables no definidas o estructuras mal configuradas.
 
 4. ¿Qué se está midiendo con ```self.inicio = time.time()```?
 
