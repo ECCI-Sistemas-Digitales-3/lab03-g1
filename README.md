@@ -96,6 +96,13 @@ Cada vez que se actualiza la temperatura, se añade una línea con el tiempo y l
 
 ## Diagrama de flujo 
 
+![Diagrama de flujo](/diagrama_flujo.png)
+
+Explicacion del diagrama de flujo
+
+Este diagrama de flujo representa el ciclo completo de funcionamiento del sistema de monitoreo de temperatura implementado en la clase MonitorTemperaturaRPI. El proceso comienza con la inicialización de los atributos del monitor, que incluye los parámetros de configuración, la preparación de la gráfica y la creación del archivo CSV donde se registrarán las temperaturas. También se activa el modo interactivo de matplotlib, lo que permite la actualización dinámica del gráfico en tiempo real.
+
+Durante cada ciclo del bucle de monitoreo, se calcula el tiempo transcurrido desde el inicio de la ejecución, se obtiene la temperatura actual del sistema mediante un comando del sistema operativo y se valida la lectura. Si la temperatura es válida, se almacenan los datos tanto en memoria como en el archivo CSV. Luego, se actualiza la gráfica para reflejar los datos más recientes y se introduce una pausa controlada según el intervalo definido. Finalmente, se comprueba si la ventana gráfica sigue abierta; si es así, el ciclo continúa. Si no, se finaliza el monitoreo cerrando correctamente la gráfica. Este diseño garantiza una operación continua, robusta ante fallos puntuales de lectura, y optimizada para visualización en tiempo real.
 
 ## Preguntas
 
