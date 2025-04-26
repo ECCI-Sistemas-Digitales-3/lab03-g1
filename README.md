@@ -7,7 +7,7 @@
 
 [Nelson Prada](https://github.com/nelson18prada)
 
-Miguel Angel Bernal 
+[Miguel Angel Bernal](https://github.com/Miguelbernalradio) 
 
 ## Documentación
  Descripción General
@@ -101,9 +101,13 @@ Cada vez que se actualiza la temperatura, se añade una línea con el tiempo y l
 
 Explicacion del diagrama de flujo
 
-Este diagrama de flujo representa el ciclo completo de funcionamiento del sistema de monitoreo de temperatura implementado en la clase MonitorTemperaturaRPI. El proceso comienza con la inicialización de los atributos del monitor, que incluye los parámetros de configuración, la preparación de la gráfica y la creación del archivo CSV donde se registrarán las temperaturas. También se activa el modo interactivo de matplotlib, lo que permite la actualización dinámica del gráfico en tiempo real.
+El diagrama de flujo describe un proceso secuencial para monitorear y registrar temperaturas, comenzando con la inicialización del sistema y la creación de un archivo CSV para almacenar los datos. A continuación, se activa una gráfica interactiva para visualizar las mediciones en tiempo real. El sistema calcula el tiempo transcurrido y realiza lecturas de temperatura, verificando su validez antes de proceder con el almacenamiento y la representación gráfica.
 
-Durante cada ciclo del bucle de monitoreo, se calcula el tiempo transcurrido desde el inicio de la ejecución, se obtiene la temperatura actual del sistema mediante un comando del sistema operativo y se valida la lectura. Si la temperatura es válida, se almacenan los datos tanto en memoria como en el archivo CSV. Luego, se actualiza la gráfica para reflejar los datos más recientes y se introduce una pausa controlada según el intervalo definido. Finalmente, se comprueba si la ventana gráfica sigue abierta; si es así, el ciclo continúa. Si no, se finaliza el monitoreo cerrando correctamente la gráfica. Este diseño garantiza una operación continua, robusta ante fallos puntuales de lectura, y optimizada para visualización en tiempo real.
+Si la lectura es válida, los datos se guardan en el archivo CSV y se actualizan en la gráfica, lo que permite un seguimiento continuo y preciso. En caso contrario, el proceso omite estos pasos y avanza directamente a la espera de un intervalo de tiempo predefinido antes de repetir el ciclo. Esta validación asegura que solo se registren datos correctos, manteniendo la integridad del sistema.
+
+El flujo opera en un ciclo repetitivo, donde cada iteración incluye la lectura, validación, almacenamiento y visualización de datos, seguida de una pausa controlada. Este enfoque es común en sistemas de adquisición de datos, donde la periodicidad y la precisión son esenciales. La combinación de almacenamiento en CSV y visualización gráfica facilita tanto el análisis posterior como el monitoreo en tiempo real.
+
+Finalmente, el proceso puede terminar manualmente o bajo ciertas condiciones, cerrando el archivo CSV y deteniendo la gráfica. Este diseño modular y eficiente es ideal para aplicaciones de monitoreo ambiental, industrial o científico, donde la recolección y el análisis de datos son fundamentales para la toma de decisiones.
 
 ## Preguntas
 
@@ -142,3 +146,4 @@ Este bloque captura errores que puedan ocurrir al intentar leer la temperatura, 
 9. ¿Cómo podría modificar el script para guardar las temperaturas en un archivo .```csv```?
 
 Puedes abrir un archivo en modo de escritura (with open("datos.csv", "a")) y usar csv.writer o simplemente escribir una línea con archivo.write(f"{tiempo},{temperatura}\n") dentro del ciclo donde se lee la temperatura. Así cada dato se guarda en formato separado por comas.
+
